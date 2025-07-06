@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../polling_frontend"
+		}
+	],
+	"settings": {}
+}
