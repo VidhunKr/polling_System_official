@@ -60,7 +60,7 @@ This project was enhanced using **ChatGPT** for:
 
 ##  Screen Recording
 
-[[Add your Google Drive screen recording link here]](https://drive.google.com/file/d/10Q20J9e4poPfrKKtmo0kwAKLTVsAfG3m/view?usp=sharing)
+[[screen recording link]](https://drive.google.com/file/d/10Q20J9e4poPfrKKtmo0kwAKLTVsAfG3m/view?usp=sharing)
 
 ---
 
