@@ -16,7 +16,6 @@ This is a simple **Polling System** built using **Node.js**, **Express**, **JWT 
 - Polls **expire in 2 hours**
 - **Protected Routes** using roles and tokens
 - Simple and clean **HTML + JS Frontend**
-- Basic **Role-Based Access Control**
 
 ---
 
