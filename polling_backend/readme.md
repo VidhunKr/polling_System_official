@@ -27,10 +27,6 @@ This is a simple polling system built using **Node.js**, **Express**,**JWT**, **
 
 ---
 
-<<<<<<< HEAD:polling_backend/readme.md
-
-=======
->>>>>>> ec566930880aac145576d172baede1a47356b2e8:readme.md
 ## ScreenRecorder DriveLink
 https://drive.google.com/file/d/1Bw_dS6oCwaIIGYVMfZtP5LP3pvm_1Oy8/view?usp=sharing
 
