@@ -40,4 +40,17 @@ console.log("votedPolls",poll);
 
 }
 
-
+export const getPoll = async (req,res)=>{
+  try{
+    // const userId = req.user?.id
+    const polls = await pollModel.find()
+      // $or:[
+      //   {visibility:"public"},
+      //   {userAllowed:userId}
+      // ]
+    
+    res.json(polls)
+  }catch(err){
+    res.status(400).json({msg:"Fetch polls Failed"})
+  }
+}
