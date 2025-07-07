@@ -38,7 +38,6 @@ export const votePoll = async (req,res)=>{
     res.json(poll)
 console.log("votedPolls",poll);
 
-    
 }
 
 

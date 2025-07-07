@@ -27,8 +27,6 @@ This is a simple polling system built using **Node.js**, **Express**,**JWT**, **
 
 ---
 
-## RepositoryLink 
-https://github.com/VidhunKr/polling_System_official
 
 ## ScreenRecorder DriveLink
 https://drive.google.com/file/d/1Bw_dS6oCwaIIGYVMfZtP5LP3pvm_1Oy8/view?usp=sharing
