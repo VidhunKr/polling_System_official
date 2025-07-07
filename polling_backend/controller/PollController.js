@@ -42,15 +42,34 @@ console.log("votedPolls",poll);
 
 export const getPoll = async (req,res)=>{
   try{
-    // const userId = req.user?.id
-    const polls = await pollModel.find()
-      // $or:[
-      //   {visibility:"public"},
-      //   {userAllowed:userId}
-      // ]
-    
-    res.json(polls)
+    const polls = await pollModel.find() 
   }catch(err){
     res.status(400).json({msg:"Fetch polls Failed"})
   }
 }
+
+export const editPoll = async (req,res)=>{
+   try{
+    const poll =await pollModel.findById(req.params.id)
+    // if(!poll) return res.status(400).json({msg:"poll not found"})
+    //   if(new Date()> poll.expiresAt)
+    //     return res.status(400).json({msg:"expired "})
+    //   Object.assign(poll,req,body)
+      await poll.save()
+      res.json({msg:"poll updated ", poll})
+
+   }catch(err){
+return res.status(400).json({msg:"eroor editing poll"})
+   }
+}
+
+export const deletePoll = async (req, res) => {
+  try {
+    const poll = await pollModel.findByIdAndDelete(req.params.id);
+    if (!poll) return res.status(404).json({ msg: "Poll not found" });
+
+    res.json({ msg: "Poll deleted", poll });
+  } catch (err) {
+    return res.status(400).json({ msg: "Error deleting poll" });
+  }
+};
