@@ -1,3 +1,232 @@
+Here’s the complete Angular 19 Standalone Todo App with a clean folder structure and working code.
+
+
+---
+
+✅ Project Setup
+
+ng new todo-app --standalone --routing
+cd todo-app
+
+ng g c components/todo-list --standalone
+ng g c components/add-todo --standalone
+ng g s services/todo
+ng g interface models/todo
+
+
+---
+
+✅ Folder Structure
+
+src/
+  app/
+    components/
+      todo-list/
+        todo-list.component.ts
+        todo-list.component.html
+        todo-list.component.scss
+      add-todo/
+        add-todo.component.ts
+        add-todo.component.html
+        add-todo.component.scss
+    services/
+      todo.service.ts
+    models/
+      todo.ts
+    app.config.ts
+    main.ts
+
+
+---
+
+✅ models/todo.ts
+
+export interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+
+---
+
+✅ services/todo.service.ts
+
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Todo } from '../models/todo';
+
+@Injectable({ providedIn: 'root' })
+export class TodoService {
+  private todos = new BehaviorSubject<Todo[]>([]);
+  todos$ = this.todos.asObservable();
+
+  private idCounter = 1;
+
+  addTodo(title: string) {
+    const newTodo: Todo = {
+      id: this.idCounter++,
+      title,
+      completed: false,
+    };
+    this.todos.next([...this.todos.value, newTodo]);
+  }
+
+  toggleTodo(id: number) {
+    const updated = this.todos.value.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    this.todos.next(updated);
+  }
+
+  deleteTodo(id: number) {
+    const filtered = this.todos.value.filter(todo => todo.id !== id);
+    this.todos.next(filtered);
+  }
+}
+
+
+---
+
+✅ components/add-todo/add-todo.component.ts
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TodoService } from '../../services/todo.service';
+
+@Component({
+  selector: 'app-add-todo',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './add-todo.component.html'
+})
+export class AddTodoComponent {
+  title = '';
+
+  constructor(private todoService: TodoService) {}
+
+  add() {
+    if (this.title.trim()) {
+      this.todoService.addTodo(this.title);
+      this.title = '';
+    }
+  }
+}
+
+add-todo.component.html
+
+<input [(ngModel)]="title" placeholder="Enter todo" />
+<button (click)="add()">Add</button>
+
+
+---
+
+✅ components/todo-list/todo-list.component.ts
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TodoService } from '../../services/todo.service';
+import { Observable } from 'rxjs';
+import { Todo } from '../../models/todo';
+
+@Component({
+  selector: 'app-todo-list',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './todo-list.component.html'
+})
+export class TodoListComponent {
+  todos$: Observable<Todo[]>;
+
+  constructor(private todoService: TodoService) {
+    this.todos$ = this.todoService.todos$;
+  }
+
+  toggle(id: number) {
+    this.todoService.toggleTodo(id);
+  }
+
+  remove(id: number) {
+    this.todoService.deleteTodo(id);
+  }
+}
+
+todo-list.component.html
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">
+    <input type="checkbox" [checked]="todo.completed" (change)="toggle(todo.id)" />
+    <span [style.textDecoration]="todo.completed ? 'line-through' : 'none'">
+      {{ todo.title }}
+    </span>
+    <button (click)="remove(todo.id)">x</button>
+  </li>
+</ul>
+
+
+---
+
+✅ main.ts
+
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig)
+  .catch(err => console.error(err));
+
+
+---
+
+✅ app.component.ts
+
+import { Component } from '@angular/core';
+import { AddTodoComponent } from './components/add-todo/add-todo.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [AddTodoComponent, TodoListComponent],
+  template: `
+    <h1>Todo App</h1>
+    <app-add-todo></app-add-todo>
+    <app-todo-list></app-todo-list>
+  `
+})
+export class AppComponent {}
+
+
+---
+
+✅ app.config.ts
+
+import { ApplicationConfig } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: []
+};
+
+
+---
+
+This is a complete standalone Angular 19 Todo App with proper separation of logic, service-based state management, and no external backend. Ready for machine test submission.
+
+Would you like a downloadable .zip version or add persistent localStorage support?
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Polling System
 
 This is a simple **Polling System** built using **Node.js**, **Express**, **JWT Authentication**, and **MongoDB** on the backend, with a basic **HTML + JavaScript (Vanilla)** frontend.
