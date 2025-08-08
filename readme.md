@@ -1,3 +1,81 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <input placeholder="First Name" formControlName="firstName">
+  <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+    First Name is required.
+  </div><br>
+
+  <input placeholder="Last Name" formControlName="lastName">
+  <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+    Last Name is required.
+  </div><br>
+
+  <input type="date" formControlName="dob">
+  <div *ngIf="form.get('dob')?.touched && form.get('dob')?.invalid">
+    Date of Birth is required.
+  </div><br>
+
+  <label><input type="radio" value="Male" formControlName="gender"> Male</label>
+  <label><input type="radio" value="Female" formControlName="gender"> Female</label>
+  <div *ngIf="form.get('gender')?.touched && form.get('gender')?.invalid">
+    Gender is required.
+  </div><br>
+
+  <input placeholder="Mobile Number" formControlName="mobile">
+  <div *ngIf="form.get('mobile')?.touched && form.get('mobile')?.invalid">
+    <div *ngIf="form.get('mobile')?.errors?.['required']">Mobile number is required.</div>
+    <div *ngIf="form.get('mobile')?.errors?.['pattern']">Enter 8–10 digit number only.</div>
+  </div><br>
+
+  <input placeholder="Address" formControlName="address">
+  <div *ngIf="form.get('address')?.touched && form.get('address')?.invalid">
+    Address is required.
+  </div><br>
+
+  <input placeholder="Email" formControlName="email">
+  <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+    <div *ngIf="form.get('email')?.errors?.['required']">Email is required.</div>
+    <div *ngIf="form.get('email')?.errors?.['email']">Invalid email format.</div>
+  </div><br>
+
+  <input type="password" placeholder="Password" formControlName="password">
+  <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+    <div *ngIf="form.get('password')?.errors?.['required']">Password is required.</div>
+    <div *ngIf="form.get('password')?.errors?.['pattern']">
+      Must be at least 6 chars, 1 uppercase, 1 number.
+    </div>
+  </div><br>
+
+  <input type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+  <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.invalid">
+    Confirm Password is required.
+  </div>
+  <div *ngIf="form.get('confirmPassword')?.touched && form.value.password !== form.value.confirmPassword">
+    Passwords do not match.
+  </div><br>
+
+  <label>
+    <input type="checkbox" formControlName="declaration">
+    I confirm that all details are correct
+  </label>
+  <div *ngIf="form.get('declaration')?.touched && form.get('declaration')?.invalid">
+    You must accept the declaration.
+  </div><br>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
 https://chatgpt.com/share/6895935a-4584-8009-b13c-b29fa39f9f8d
 
 Here’s the complete Angular 19 Standalone Todo App with a clean folder structure and working code.
